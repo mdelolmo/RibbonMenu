@@ -2,11 +2,13 @@ package com.darvds.ribbonmenu;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -22,8 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.darvds.ribbonmenu.RibbonMenuView.SavedState;
-
 public class RibbonMenuView extends LinearLayout {
 
 	private ListView rbmListView;
@@ -33,6 +33,7 @@ public class RibbonMenuView extends LinearLayout {
 	
 	private static ArrayList<RibbonMenuItem> menuItems;
 	
+	private RibbonMenuAdapter adapter;
 	
 	public RibbonMenuView(Context context) {
 		super(context);
@@ -114,21 +115,45 @@ public class RibbonMenuView extends LinearLayout {
 		this.callback = callback;
 	}
 	
+	public void addHeader(View headerView){
+		rbmListView.addHeaderView(headerView, null, false);
+	}
+	
 	public void setMenuItems(int menu){
 		
 		parseXml(menu);
 		
 		if(menuItems != null && menuItems.size() > 0)
 		{
-			rbmListView.setAdapter(new Adapter());
+			if (adapter != null){
+				rbmListView.setAdapter(adapter);
+			}else{
+				rbmListView.setAdapter(new RibbonMenuAdapter());
+			}
 			
 		}
-		
-		
 		
 	
 	}
 	
+	public void setMenuItems(List<? extends RibbonMenuItem> menu){
+		if (menuItems == null){
+			menuItems = new ArrayList<RibbonMenuView.RibbonMenuItem>();
+		}
+		menuItems.addAll(menu);
+		
+		if(menuItems != null && menuItems.size() > 0)
+		{
+			if (adapter != null){
+				rbmListView.setAdapter(adapter);
+			}else{
+				rbmListView.setAdapter(new RibbonMenuAdapter());
+			}
+			
+		}
+		
+	
+	}
 	
 	public void setBackgroundResource(int resource){
 		rbmListView.setBackgroundResource(resource);
@@ -136,8 +161,14 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
-	
-	
+	public RibbonMenuAdapter getAdapter() {
+		return adapter;
+	}
+
+	public void setAdapter(RibbonMenuAdapter adapter) {
+		this.adapter = adapter;
+	}
+
 	public void showMenu(){
 		rbmOutsideView.setVisibility(View.VISIBLE);	
 				
@@ -301,21 +332,20 @@ public class RibbonMenuView extends LinearLayout {
 	
 	
 	
-	class RibbonMenuItem{
-		
-		int id;
-		String text;
-		int icon;
-		
+	public class RibbonMenuItem{
+		public int id;
+		public String text;
+		public int icon;
+		public Bitmap iconBmp;
 	}
 	
 	
 	
-	private class Adapter extends BaseAdapter {
+	public class RibbonMenuAdapter extends BaseAdapter {
 
 		private LayoutInflater inflater;
 		
-		public Adapter(){
+		public RibbonMenuAdapter(){
 			inflater = LayoutInflater.from(getContext());
 		}
 		
@@ -329,8 +359,11 @@ public class RibbonMenuView extends LinearLayout {
 
 		@Override
 		public Object getItem(int position) {
-			
-			return null;
+			if (menuItems != null){
+				return menuItems.get(position);
+			}else{
+				return null;
+			}
 		}
 
 		@Override
@@ -357,8 +390,11 @@ public class RibbonMenuView extends LinearLayout {
 			
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
-			holder.image.setImageResource(menuItems.get(position).icon);
+			if (menuItems.get(position).iconBmp != null){
+				holder.image.setImageBitmap(menuItems.get(position).iconBmp);
+			}else{
+				holder.image.setImageResource(menuItems.get(position).icon);
+			}
 			holder.text.setText(menuItems.get(position).text);
 			
 			
@@ -366,9 +402,9 @@ public class RibbonMenuView extends LinearLayout {
 		}
 		
 		
-		class ViewHolder {
-			TextView text;
-			ImageView image;
+		public class ViewHolder {
+			public TextView text;
+			public ImageView image;
 		
 		}
 			

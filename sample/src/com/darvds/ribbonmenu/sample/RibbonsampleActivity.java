@@ -3,6 +3,7 @@ package com.darvds.ribbonmenu.sample;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.darvds.ribbonmenu.R;
 import com.darvds.ribbonmenu.RibbonMenuView;
@@ -24,12 +25,14 @@ public class RibbonsampleActivity extends Activity implements iRibbonMenuCallbac
 	        rbmView.setMenuClickCallback(this);
 	        rbmView.setMenuItems(R.menu.ribbon_menu);
 	        
-	         getActionBar().setDisplayHomeAsUpEnabled(true);
+//	         getActionBar().setDisplayHomeAsUpEnabled(true);
 	         
 	        
 	    }
 	    
-	    
+	    public void menu(View v){
+	    	rbmView.toggleMenu();
+	    }
 	    
 
 		@Override
