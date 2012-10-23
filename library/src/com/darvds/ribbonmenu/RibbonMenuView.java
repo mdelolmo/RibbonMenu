@@ -12,9 +12,12 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,7 +34,7 @@ public class RibbonMenuView extends LinearLayout {
 	
 	private iRibbonMenuCallback callback;
 	
-	private static ArrayList<RibbonMenuItem> menuItems;
+	private ArrayList<RibbonMenuItem> menuItems;
 	
 	private RibbonMenuAdapter adapter;
 	
@@ -144,11 +147,11 @@ public class RibbonMenuView extends LinearLayout {
 		
 		if(menuItems != null && menuItems.size() > 0)
 		{
-			if (adapter != null){
-				rbmListView.setAdapter(adapter);
-			}else{
-				rbmListView.setAdapter(new RibbonMenuAdapter());
+			if (adapter == null){
+				adapter = new RibbonMenuAdapter();
 			}
+			rbmListView.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 			
 		}
 		
@@ -173,8 +176,8 @@ public class RibbonMenuView extends LinearLayout {
 		rbmOutsideView.setVisibility(View.VISIBLE);	
 				
 		rbmListView.setVisibility(View.VISIBLE);	
-		rbmListView.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.rbm_in_from_left));
-		
+		Animation loadAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.rbm_in_from_left);
+		rbmListView.startAnimation(loadAnimation);
 	}
 	
 	
@@ -189,7 +192,6 @@ public class RibbonMenuView extends LinearLayout {
 	
 	
 	public void toggleMenu(){
-		
 		if(rbmOutsideView.getVisibility() == View.GONE){
 			showMenu();
 		} else {
@@ -199,16 +201,13 @@ public class RibbonMenuView extends LinearLayout {
 	
 	
 	private void parseXml(int menu){
-		
 		menuItems = new ArrayList<RibbonMenuView.RibbonMenuItem>();
-		
 		
 		try{
 			XmlResourceParser xpp = getResources().getXml(menu);
 			
 			xpp.next();
 			int eventType = xpp.getEventType();
-			
 			
 			while(eventType != XmlPullParser.END_DOCUMENT){
 				
@@ -229,13 +228,10 @@ public class RibbonMenuView extends LinearLayout {
 						RibbonMenuItem item = new RibbonMenuItem();
 						item.id = Integer.valueOf(resId.replace("@", ""));
 						item.text = resourceIdToString(textId);
-						item.icon = Integer.valueOf(iconId.replace("@", ""));
+						item.iconRes = Integer.valueOf(iconId.replace("@", ""));
 						
 						menuItems.add(item);
-						
 					}
-					
-					
 					
 				}
 				
@@ -250,9 +246,6 @@ public class RibbonMenuView extends LinearLayout {
 		}
 		
 	}
-	
-	
-	
 	
 	
 	private String resourceIdToString(String text){
@@ -335,7 +328,7 @@ public class RibbonMenuView extends LinearLayout {
 	public class RibbonMenuItem{
 		public int id;
 		public String text;
-		public int icon;
+		public int iconRes;
 		public Bitmap iconBmp;
 	}
 	
@@ -349,12 +342,14 @@ public class RibbonMenuView extends LinearLayout {
 			inflater = LayoutInflater.from(getContext());
 		}
 		
-		
-		
 		@Override
 		public int getCount() {
-			
 			return menuItems.size();
+		}
+
+		@Override
+		public int getViewTypeCount() {
+			return 1;
 		}
 
 		@Override
@@ -367,15 +362,15 @@ public class RibbonMenuView extends LinearLayout {
 		}
 
 		@Override
-		public long getItemId(int position) {
-			
-			return 0;
+		public long getItemId(int position) {			
+			return menuItems.get(position).id;
 		}
+		
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
-			final ViewHolder holder;
+			ViewHolder holder;
 			
 			if(convertView == null || convertView instanceof TextView){
 				convertView = inflater.inflate(R.layout.rbm_item, null);
@@ -386,14 +381,13 @@ public class RibbonMenuView extends LinearLayout {
 						
 				convertView.setTag(holder);
 			
-			} else {
-			
+			} else {			
 				holder = (ViewHolder) convertView.getTag();
 			}
 			if (menuItems.get(position).iconBmp != null){
 				holder.image.setImageBitmap(menuItems.get(position).iconBmp);
 			}else{
-				holder.image.setImageResource(menuItems.get(position).icon);
+				holder.image.setImageResource(menuItems.get(position).iconRes);
 			}
 			holder.text.setText(menuItems.get(position).text);
 			
