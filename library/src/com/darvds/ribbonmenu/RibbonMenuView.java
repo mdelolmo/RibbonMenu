@@ -102,9 +102,9 @@ public class RibbonMenuView extends LinearLayout {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				if(callback != null)					
-					callback.RibbonMenuItemClick(menuItems.get(position).id);
-				
+				if(callback != null){
+					callback.RibbonMenuItemClick((int) id);
+				}
 				hideMenu();
 			}
 			
