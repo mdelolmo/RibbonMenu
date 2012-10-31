@@ -12,19 +12,14 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class RibbonMenuView extends LinearLayout {
 
@@ -32,6 +27,7 @@ public class RibbonMenuView extends LinearLayout {
 	private static final int TYPE_RIGHT = 1;
 	private ListView rbmListView;
 	private View rbmOutsideView;
+	private boolean headerAdded = false;
 
 	private iRibbonMenuCallback callback;
 
@@ -119,9 +115,14 @@ public class RibbonMenuView extends LinearLayout {
 	}
 
 	public void addHeader(View headerView) {
+		headerAdded = true;
 		rbmListView.addHeaderView(headerView, null, false);
 	}
 
+	public boolean hasHeader(){
+		return headerAdded;
+	}
+	
 	public void setMenuItems(int menu) {
 
 		parseXml(menu);
@@ -130,7 +131,7 @@ public class RibbonMenuView extends LinearLayout {
 			if (adapter != null) {
 				rbmListView.setAdapter(adapter);
 			} else {
-				rbmListView.setAdapter(new RibbonMenuAdapter());
+				rbmListView.setAdapter(new RibbonMenuAdapter(menuItems, getContext()));
 			}
 
 		}
@@ -145,7 +146,7 @@ public class RibbonMenuView extends LinearLayout {
 
 		if (menuItems != null && menuItems.size() > 0) {
 			if (adapter == null) {
-				adapter = new RibbonMenuAdapter();
+				adapter = new RibbonMenuAdapter(menuItems, getContext());
 			}
 			rbmListView.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
@@ -327,77 +328,9 @@ public class RibbonMenuView extends LinearLayout {
 		public String text;
 		public int iconRes;
 		public Bitmap iconBmp;
+		public Bitmap background;
 	}
 
-	public class RibbonMenuAdapter extends BaseAdapter {
 
-		private LayoutInflater inflater;
-
-		public RibbonMenuAdapter() {
-			inflater = LayoutInflater.from(getContext());
-		}
-
-		@Override
-		public int getCount() {
-			return menuItems.size();
-		}
-
-		@Override
-		public int getViewTypeCount() {
-			return 1;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			if (menuItems != null) {
-				return menuItems.get(position);
-			} else {
-				return null;
-			}
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return menuItems.get(position).id;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-
-			ViewHolder holder;
-
-			if (convertView == null || convertView instanceof TextView) {
-				convertView = inflater.inflate(R.layout.rbm_item, null);
-
-				holder = new ViewHolder();
-				holder.image = (ImageView) convertView
-						.findViewById(R.id.rbm_item_icon);
-				holder.text = (TextView) convertView
-						.findViewById(R.id.rbm_item_text);
-
-				convertView.setTag(holder);
-
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-			if (menuItems.get(position).iconBmp != null) {
-				holder.image.setImageBitmap(menuItems.get(position).iconBmp);
-			} else {
-				holder.image.setImageResource(menuItems.get(position).iconRes);
-			}
-			if (menuItems.get(position).text != null) {
-				holder.text.setText(menuItems.get(position).text);
-			}
-
-			return convertView;
-		}
-
-		public class ViewHolder {
-			public TextView text;
-			public ImageView image;
-
-		}
-
-	}
 
 }
