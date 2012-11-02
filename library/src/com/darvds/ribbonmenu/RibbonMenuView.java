@@ -139,9 +139,7 @@ public class RibbonMenuView extends LinearLayout {
 	}
 
 	public void setMenuItems(List<? extends RibbonMenuItem> menu) {
-		if (menuItems == null) {
-			menuItems = new ArrayList<RibbonMenuView.RibbonMenuItem>();
-		}
+		menuItems = new ArrayList<RibbonMenuView.RibbonMenuItem>();
 		menuItems.addAll(menu);
 
 		if (menuItems != null && menuItems.size() > 0) {
