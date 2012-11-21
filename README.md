@@ -3,8 +3,8 @@ RibbonMenu
 
 Two-Level Navigation menu for Android
 Based on David Scott's [RibbonMenu](https://github.com/darvds/RibbonMenu)
-device-2012-11-21-170206.png
-![TwoLevelRibbonMenu](https://github.com/mdelolmo/RibbonMenu/twoLevelMenu/rbm1.png)
+
+![TwoLevelRibbonMenu](https://raw.github.com/mdelolmo/RibbonMenu/twoLevelMenu/device-2012-11-21-170206.png)
 
 
 Usage
