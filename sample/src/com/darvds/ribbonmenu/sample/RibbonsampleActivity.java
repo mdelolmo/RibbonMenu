@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.darvds.ribbonmenu.R;
-import com.darvds.ribbonmenu.RibbonMenuView;
-import com.darvds.ribbonmenu.iRibbonMenuCallback;
+import com.generanet.mdelolmo.ribbonmenu2L.TwoLevelRibbonMenuView;
+import com.generanet.mdelolmo.ribbonmenu2L.onTwoLevelRibbonMenuItemClick;
 
-public class RibbonsampleActivity extends Activity implements iRibbonMenuCallback {
+public class RibbonsampleActivity extends Activity implements onTwoLevelRibbonMenuItemClick {
     /** Called when the activity is first created. */
 	  
-	private RibbonMenuView rbmView;
+	private TwoLevelRibbonMenuView rbmView;
 		
 		
 	    @Override
@@ -21,10 +20,11 @@ public class RibbonsampleActivity extends Activity implements iRibbonMenuCallbac
 	        setContentView(R.layout.main);
 	        
 	        
-	        rbmView = (RibbonMenuView) findViewById(R.id.ribbonMenuView1);
-	        rbmView.setMenuClickCallback(this);
-	        rbmView.setMenuItems(R.menu.ribbon_menu);
-	        
+	        rbmView = (TwoLevelRibbonMenuView) findViewById(R.id.ribbonMenuView1);
+	        rbmView.setMenuClickCallback(this, 1);
+	        rbmView.setMenuClickCallback(this, 2);
+	        rbmView.setMenuItemsL1(R.menu.ribbon_menu);
+	        rbmView.setMenuItemsL2(R.menu.ribbon_submenu);
 //	         getActionBar().setDisplayHomeAsUpEnabled(true);
 	         
 	        
@@ -50,14 +50,11 @@ public class RibbonsampleActivity extends Activity implements iRibbonMenuCallbac
 			}
 		}
 
-
-
-
 		@Override
-		public void RibbonMenuItemClick(int itemId) {
-			
-			
-			
-			
+		public void RibbonMenuItemClick(TwoLevelRibbonMenuView menuView,
+				int itemId, int level) {
+			if (level == 1){
+				menuView.openMenuLevel2();
+			}	
 		}
 }

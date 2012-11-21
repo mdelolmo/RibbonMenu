@@ -13,44 +13,96 @@ public final class R {
         public static final int rbm_out_to_left=0x7f040001;
     }
     public static final class attr {
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>left</code></td><td>0</td><td></td></tr>
+<tr><td><code>right</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int mode=0x7f010000;
     }
     public static final class color {
-        public static final int rbm_item_text_color=0x7f050001;
-        public static final int rbm_menu_background=0x7f050000;
+        public static final int rbm_item_text_color=0x7f060001;
+        public static final int rbm_menu_background=0x7f060000;
     }
     public static final class dimen {
-        public static final int rbm_item_image_height=0x7f060003;
-        public static final int rbm_item_image_width=0x7f060004;
-        public static final int rbm_item_padding_leftright=0x7f060002;
-        public static final int rbm_item_padding_topbottom=0x7f060001;
-        public static final int rbm_item_text_padding_left=0x7f060006;
-        public static final int rbm_item_text_size=0x7f060005;
-        public static final int rbm_menu_width=0x7f060000;
+        public static final int rbm_item_image_height=0x7f070003;
+        public static final int rbm_item_image_width=0x7f070004;
+        public static final int rbm_item_padding_leftright=0x7f070002;
+        public static final int rbm_item_padding_topbottom=0x7f070001;
+        public static final int rbm_item_text_padding_left=0x7f070006;
+        public static final int rbm_item_text_size=0x7f070005;
+        public static final int rbm_menu_width=0x7f070000;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int linear=0x7f090000;
-        public static final int rbm_item_icon=0x7f090002;
-        public static final int rbm_item_text=0x7f090003;
-        public static final int rbm_listview=0x7f090004;
-        public static final int rbm_outside_view=0x7f090005;
-        public static final int ribbonMenuView1=0x7f090001;
-        public static final int ribbon_menu_home=0x7f090006;
-        public static final int ribbon_menu_home2=0x7f090007;
-        public static final int ribbon_menu_home3=0x7f090008;
+        public static final int left=0x7f050000;
+        public static final int linear=0x7f050002;
+        public static final int rbm_item_icon=0x7f050004;
+        public static final int rbm_item_text=0x7f050005;
+        public static final int rbm_listviewL1=0x7f050006;
+        public static final int rbm_listviewL2=0x7f050007;
+        public static final int rbm_outside_view=0x7f050008;
+        public static final int ribbonMenuView1=0x7f050003;
+        public static final int ribbon_menu_home1=0x7f050009;
+        public static final int ribbon_menu_home2=0x7f05000a;
+        public static final int ribbon_menu_home3=0x7f05000b;
+        public static final int ribbon_menu_home4=0x7f05000c;
+        public static final int ribbon_menu_home5=0x7f05000d;
+        public static final int ribbon_menu_subhome1=0x7f05000e;
+        public static final int ribbon_menu_subhome2=0x7f05000f;
+        public static final int ribbon_menu_subhome3=0x7f050010;
+        public static final int right=0x7f050001;
     }
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int rbm_item=0x7f030001;
-        public static final int rbm_menu=0x7f030002;
+        public static final int rbm_menu_left=0x7f030002;
     }
     public static final class menu {
-        public static final int ribbon_menu=0x7f080000;
+        public static final int ribbon_menu=0x7f090000;
+        public static final int ribbon_submenu=0x7f090001;
     }
     public static final class string {
-        public static final int app_name=0x7f070001;
-        public static final int hello=0x7f070000;
+        public static final int app_name=0x7f080001;
+        public static final int hello=0x7f080000;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a RibbonMenuView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #RibbonMenuView_mode com.darvds.ribbonmenu.sample:mode}</code></td><td></td></tr>
+           </table>
+           @see #RibbonMenuView_mode
+         */
+        public static final int[] RibbonMenuView = {
+            0x7f010000
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.darvds.ribbonmenu.sample.R.attr#mode}
+          attribute's value can be found in the {@link #RibbonMenuView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>left</code></td><td>0</td><td></td></tr>
+<tr><td><code>right</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name android:mode
+        */
+        public static final int RibbonMenuView_mode = 0;
+    };
 }

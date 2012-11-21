@@ -1,17 +1,18 @@
-package com.darvds.ribbonmenu;
+package com.generanet.mdelolmo.ribbonmenu2L;
 
 import java.util.List;
 
-import com.darvds.ribbonmenu.RibbonMenuView.RibbonMenuItem;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.darvds.ribbonmenu.R;
+import com.generanet.mdelolmo.ribbonmenu2L.TwoLevelRibbonMenuView.RibbonMenuItem;
+
 
 public class RibbonMenuAdapter extends BaseAdapter {
 

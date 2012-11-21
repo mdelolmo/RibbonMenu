@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <dimen name="rbm_menu_width">200dp</dimen>
+    <dimen name="rbm_menu_width">120dp</dimen>
   
     <dimen name="rbm_item_padding_topbottom">16dp</dimen>
     <dimen name="rbm_item_padding_leftright">8dp</dimen>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/ribbon_menu_subhome1" android:title="Sub1" android:icon="@drawable/ic_launcher"></item>
+    <item android:id="@+id/ribbon_menu_subhome2" android:title="Sub2" android:icon="@drawable/ic_launcher"></item>
+    <item android:id="@+id/ribbon_menu_subhome3" android:title="Sub3" android:icon="@drawable/ic_launcher"></item>
+</menu>

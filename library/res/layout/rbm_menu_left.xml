@@ -6,14 +6,21 @@
     
     
     <ListView 
-        android:id="@+id/rbm_listview"
+        android:id="@+id/rbm_listviewL1"
+        android:layout_width="@dimen/rbm_menu_width"
+        android:layout_height="match_parent" 
+        android:background="@color/rbm_menu_background"   
+        android:visibility="gone"
+        android:cacheColorHint="#00000000">
+    </ListView>
+    <ListView 
+        android:id="@+id/rbm_listviewL2"
         android:layout_width="@dimen/rbm_menu_width"
         android:layout_height="match_parent" 
         android:background="@color/rbm_menu_background"   
         android:visibility="gone"
         android:cacheColorHint="#00000000">
     </ListView>    
-    
     <!-- simple drop shadow -->
     <View 
         android:id="@+id/rbm_outside_view"

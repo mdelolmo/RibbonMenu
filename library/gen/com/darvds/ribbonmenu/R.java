@@ -10,9 +10,7 @@ package com.darvds.ribbonmenu;
 public final class R {
     public static final class anim {
         public static int rbm_in_from_left=0x7f030000;
-        public static int rbm_in_from_right=0x7f030001;
-        public static int rbm_out_to_left=0x7f030002;
-        public static int rbm_out_to_right=0x7f030003;
+        public static int rbm_out_to_left=0x7f030001;
     }
     public static final class attr {
         /** <p>Must be one of the following constant values.</p>
@@ -44,14 +42,14 @@ public final class R {
         public static int left=0x7f040000;
         public static int rbm_item_icon=0x7f040002;
         public static int rbm_item_text=0x7f040003;
-        public static int rbm_listview=0x7f040004;
-        public static int rbm_outside_view=0x7f040005;
+        public static int rbm_listviewL1=0x7f040004;
+        public static int rbm_listviewL2=0x7f040005;
+        public static int rbm_outside_view=0x7f040006;
         public static int right=0x7f040001;
     }
     public static final class layout {
         public static int rbm_item=0x7f020000;
         public static int rbm_menu_left=0x7f020001;
-        public static int rbm_menu_right=0x7f020002;
     }
     public static final class styleable {
         /** Attributes that can be used with a RibbonMenuView.
