@@ -5,6 +5,7 @@ import java.util.List;
 import com.darvds.ribbonmenu.RibbonMenuView.RibbonMenuItem;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class RibbonMenuAdapter extends BaseAdapter {
 		if (menuItems.get(position).iconBmp != null) {
 			holder.image.setImageBitmap(menuItems.get(position).iconBmp);
 		} else {
+			holder.image.setImageBitmap(null);
 			holder.image.setImageResource(menuItems.get(position).iconRes);
 		}
 		if (menuItems.get(position).text != null) {
